@@ -69,7 +69,9 @@ func download(id int, client *grooveshark.Client, songs <-chan pandora.Song, res
 
 		resp, err := streamKey.Download()
 		if err != nil {
-			panic(err)
+			fmt.Println(id, "> Couldn't download song")
+			results <- false
+			continue
 		}
 		defer resp.Body.Close()
 
